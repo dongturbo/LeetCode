@@ -36,3 +36,44 @@ vector<vector<string>> solveNQueens(int n) {
 	fillQueens(n, 0, coords, result);
 	return result;
 }
+
+//添加了一个记录Y轴的标记位，减少了时间复杂度
+void fillQueens(int n, int place, int xAxis[],int yAxis[], vector<vector<string>>& result){
+	if (place == n){
+		vector<string> temp;
+		for (int i = 0; i < place; i++){
+			string str(n, '.');
+			str[xAxis[i]] = 'Q';
+			temp.push_back(str);			
+		}
+		result.push_back(temp);
+		return;
+	}
+	for (int i = 0; i < n; i++){
+		if (yAxis[i] == 0){
+			int j = 0;
+			for (; j < place; j++){
+				if (abs(place - j) == abs(i - xAxis[j])){
+					break;
+				}
+			}
+			if (j==place){
+				xAxis[place] = i;
+				yAxis[i] = 1;
+				fillQueens(n, place + 1, xAxis,yAxis, result);
+				yAxis[i] = 0;
+			}
+		}		
+	}	
+	return;
+	
+}
+
+vector<vector<string>> solveNQueens(int n) {
+	vector<vector<string>> result;
+	int * xAxis= new int[n];
+	int * yAxis = new int[n];
+	memset(yAxis,0,n*sizeof(int));
+	fillQueens(n, 0, xAxis, yAxis, result);
+	return result;
+}
