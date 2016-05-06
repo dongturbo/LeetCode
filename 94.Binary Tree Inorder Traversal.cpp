@@ -14,5 +14,26 @@ vector<int> inorderTraversal(TreeNode* root) {
 	recurInorder(root,result);
 	return result;
 }
-/*利用栈实现，不用递归
+/*不用递归，利用栈迭代实现
 */
+vector<int> inorderTraversal(TreeNode* root) {
+	vector<int> result;
+	vector<TreeNode*> stack;
+	if (root == nullptr)
+		return result;
+	while (root != nullptr || !stack.empty()){
+		if (root != nullptr)
+		{
+			stack.push_back(root);
+			root = root->left;
+		}
+		else
+		{
+			root = stack.back();
+			stack.pop_back();
+			result.push_back(root->val);
+			root = root->right;
+		}
+	}
+	return result;
+} 
