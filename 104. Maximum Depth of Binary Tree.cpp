@@ -36,18 +36,5 @@ int maxDepth(TreeNode* root) {
 int maxDepth(TreeNode* root) {
 	if (root == NULL)
 		return 0;
-	if (root->left != NULL && root->right!=NULL){
-		int leftDepth = maxDepth(root->left);
-		int rightDepth = maxDepth(root->right);
-		if (leftDepth>rightDepth)
-			return leftDepth + 1;
-		else
-			return rightDepth + 1;
-	}
-	else if (root->left==NULL){
-		return maxDepth(root->right) + 1;
-	}
-	else{
-		return maxDepth(root->left) + 1;
-	}
+	return max(maxDepth(root->left),maxDepth(root->right))+1;
 }
