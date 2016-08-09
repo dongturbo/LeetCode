@@ -5,10 +5,8 @@ vector<vector<int>> generate(int numRows) {
         for(int j=0;j<=i;j++){
             if(j==0 || j==i)
                 temp[j]=1;
-            else if(j<=(i+1)/2){
+            else{
                 temp[j]=result[i-1][j]+result[i-1][j-1];
-            }else{
-                temp[j]=temp[i-j];
             }
         }
         result.push_back(temp);
