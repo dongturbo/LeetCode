@@ -1,12 +1,14 @@
 vector<vector<int>> generate(int numRows) {
     vector<vector<int>> result;
     for(int i=0;i<numRows;i++){
-        vector<int> temp;
+        vector<int> temp(i+1);
         for(int j=0;j<=i;j++){
             if(j==0 || j==i)
-                temp.push_back(1);
-            else{
-                temp.push_back(result[i-1][j]+result[i-1][j-1]);
+                temp[j]=1;
+            else if(j<=(i+1)/2){
+                temp[j]=result[i-1][j]+result[i-1][j-1];
+            }else{
+                temp[j]=temp[i-j];
             }
         }
         result.push_back(temp);
