@@ -28,3 +28,18 @@ int numDistinct(string s, string t) {
   return result;
 
 }
+
+/*二维动规+滚动数组
+  设状态为f(i,j)表示T[0,j]在S[0,i]里出现的次数。首先，判断S[i]和T[j]是否相等，不相等则f(i,j)=f(i-1,j);若相等，
+  则f(i,j)=f(i-1,j)+f(i-1,j-1)
+*/
+int numDistinct(const string &S, const string &T) {
+    vector<int> f(T.size() + 1);
+    f[0] = 1;
+    for (int i = 0; i < S.size(); ++i) {
+        for (int j = T.size() - 1; j >= 0; --j) {
+            f[j + 1] += S[i] == T[j] ? f[j] : 0;
+        }
+    }
+    return f[T.size()];
+}
