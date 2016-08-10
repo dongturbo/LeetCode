@@ -20,3 +20,11 @@ int minimumTotal(vector<vector<int>>& triangle) {
 		minTotal = min(minTotal, minSum[i]);
 	return minTotal;
 }
+//自底向上，这样最上面那个元素即为最小路径
+int minimumTotal (vector<vector<int>>& triangle) {
+	for (int i = triangle.size() - 2; i >= 0; --i)
+	    for (int j = 0; j < i + 1; ++j)
+	        triangle[i][j] += min(triangle[i + 1][j],
+	        triangle[i + 1][j + 1]);
+	return triangle [0][0];
+}
