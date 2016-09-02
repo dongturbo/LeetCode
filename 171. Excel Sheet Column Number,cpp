@@ -1,0 +1,8 @@
+//和进制换行类似，循环累加即可
+int titleToNumber(string s) {
+    int num=0;
+    for(int i=0;i<s.length();i++){
+        num=num*26+s[i]-'A'+1;
+    }
+    return num;
+}
