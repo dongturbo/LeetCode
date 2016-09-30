@@ -40,3 +40,16 @@ int kthSmallest(vector<vector<int>>& matrix, int k) {
   }
   return matrix[target][indexs[target]];
 }
+
+
+  int kthSmallest(vector<vector<int>>& matrix, int k) {
+     int size = matrix.size(), l = matrix[0][0], r = matrix[size-1][size-1];
+      while(l < r)
+      {
+          int smaller = 0, m =(r+l)/2;
+          for(int i = 0; i < size; ++i) 
+              smaller += upper_bound(matrix[i].begin(), matrix[i].end(), m)-matrix[i].begin();
+          smaller<k? l=m+1 : r=m;
+      }
+      return r;
+  }
